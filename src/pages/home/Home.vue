@@ -4,7 +4,7 @@
  * @Author: Yimi81
  * @Date: 2020-11-25 17:03:54
  * @LastEditors: Yimi81
- * @LastEditTime: 2021-01-06 12:53:08
+ * @LastEditTime: 2021-01-07 16:40:37
 -->
 <template>
   <div>
@@ -60,12 +60,10 @@
       </div>
 
       <div class="section" id="section2">
-        <div class="title">
-          <transition
-            enter-active-class="animate__bounceInLeft"
-            :duration="{ enter: 800, leave: 800 }"
-          >
-            <p v-if="flag2" class="animate__animated">首页标题</p>
+        <div class="container">
+          <!--调用组件简化代码-->
+          <transition  enter-active-class="animate__animated animate__fadeIn" >
+            <resume v-if="flag2" :resumeDetail="resumeDeatil"> </resume>
           </transition>
         </div>
       </div>
@@ -75,6 +73,7 @@
 
 <script>
 import "fullpage.js/dist/fullpage.css";
+import Resume from "./components/Resume.vue";
 export default {
   name: "",
   data() {
@@ -103,13 +102,69 @@ export default {
         require("../../assets/images/tech-8.png"),
         require("../../assets/images/tech-6.png"),
       ],
+      //个人履历
+      resumeDeatil: [
+        {
+          key: 0,
+          experiences: {
+            time: "2020 - now",
+            title: "Fulltime FrontEngineer",
+            detail:
+              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+          },
+          education: {
+            time: "2020 - now",
+            title: "Bachelor of CS,NIT",
+            detail:
+              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+          },
+        },
+        {
+          key: 1,
+          experiences: {
+            time: "2018 - 2020",
+            title: "Web Designer at HuaWei",
+            detail:
+              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+          },
+          education: {
+            time: "2018 - 2020",
+            title: "Bachelor of CS,NIT",
+            detail:
+              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+          },
+        },
+        {
+          key: 2,
+          experiences: {
+            time: "2018 - 2020",
+            title: "Web Designer at HuaWei",
+            detail:
+              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+          },
+          education: {
+            time: "2018 - 2020",
+            title: "Bachelor of CS,NIT",
+            detail:
+              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+          },
+        },
+      ],
       // styleObject:{
       //    backgroundImage:`url(${require('../../assets/images/parallax-2.jpg')})`,
       // }
     };
   },
+  components: {
+    resume: Resume,
+  },
   created() {},
-  mounted() {},
+  mounted() {
+        //监听屏幕分辨率改变
+       window.onresize = () => {
+         
+      };
+  },
   methods: {
     afterRender() {
       this.flag0 = true;
@@ -169,13 +224,25 @@ export default {
   box-sizing: initial;
   background-color: #fff;
   border-style: none;
-  
 }
 /* #section1 {
   background-image: url("~@/assets/images/parallax-2.jpg");
 } */
 #section2 {
-  background-image: url("~@/assets/images/parallax-1.jpg");
+  background-image: url("~@/assets/images/2.jpg");
+  position: relative;
+  z-index: 0;
+  padding: 5rem 0;
+}
+#section2:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.57);
+  position: absolute;
+  top: 0;
+  min-height: 100%;
+  left: 0;
+  right: 0;
+  z-index: -1;
 }
 
 .title {
@@ -248,5 +315,45 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+/* @media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+} */
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1140px;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
+}
+.animate__animated.animate__fadeIn {
+  --animate-duration: 4s;
 }
 </style>
