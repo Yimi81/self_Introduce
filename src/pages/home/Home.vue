@@ -4,7 +4,7 @@
  * @Author: Yimi81
  * @Date: 2020-11-25 17:03:54
  * @LastEditors: Yimi81
- * @LastEditTime: 2021-01-07 16:40:37
+ * @LastEditTime: 2021-01-11 15:53:48
 -->
 <template>
   <div>
@@ -40,29 +40,43 @@
       </div>
       <div class="section" id="section1">
         <div class="slide" id="slide1">
-          <h1>Lazy load image</h1>
-          <img data-src="../../assets/logo.png" alt="iphone" />
+          <transition enter-active-class="animate__fadeInLeft">
+            <div v-if="flag1" class="work-info animate__animated">
+              <p class="intro-line"></p>
+              <p>Use the wow factor to impress your visitors!</p>
+              <h1 class="anim-wrapper">
+                <span>Wow!</span>
+              </h1>
+            </div>
+          </transition>
+          <transition enter-active-class="animate__fadeInRight">
+            <div v-show="flag1" class="work-video animate__animated">
+              <video
+                width="560"
+                height="315"
+                loop
+                muted
+                controls="false"
+                data-autoplay
+              >
+                <source
+                  src="http://119.23.62.18/Download/FinalDesign.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+          </transition>
         </div>
 
         <div class="slide" id="slide2">
-          <h1>Lazy load video</h1>
-          <video loop muted controls="false" data-autoplay>
-            <source
-              data-src="http://www.w3schools.com/html/mov_bbb.mp4"
-              type="video/mp4"
-            />
-            <source
-              data-src="http://www.w3schools.com/html/mov_bbb.ogg"
-              type="video/ogg"
-            />
-          </video>
+
         </div>
       </div>
 
       <div class="section" id="section2">
         <div class="container">
           <!--调用组件简化代码-->
-          <transition  enter-active-class="animate__animated animate__fadeIn" >
+          <transition enter-active-class="animate__animated animate__fadeIn">
             <resume v-if="flag2" :resumeDetail="resumeDeatil"> </resume>
           </transition>
         </div>
@@ -160,10 +174,8 @@ export default {
   },
   created() {},
   mounted() {
-        //监听屏幕分辨率改变
-       window.onresize = () => {
-         
-      };
+    //监听屏幕分辨率改变
+    window.onresize = () => {};
   },
   methods: {
     afterRender() {
@@ -272,12 +284,70 @@ export default {
 }
 /*Adding background for the slides
 * --------------------------------------- */
+#section1 .fp-slide {
+  text-align: left;
+  position: relative;
+}
 #slide1 {
   background-image: url("~@/assets/images/section2-1.jpg");
+  position: relative;
+  z-index: 0;
+}
+#slide1:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.57);
+  position: absolute;
+  top: 0;
+  min-height: 100%;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+#slide1 .work-info {
+  margin: 0 auto;
+  display: inline-block;
+  width: auto;
+  padding: 0 0 0 10%;
+  position: absolute;
+  top: 32%;
+}
+#slide1 .work-video {
+  position: absolute;
+  top: 32%;
+  padding-right: 10%;
+  right: 0;
+}
+.video-style {
+  width: 300px;
+  height: 300px;
+}
+p {
+  padding: 0;
+  color: #fff;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 1.5em;
+}
+p.intro-line {
+  border-bottom: 4px;
+  width: 177px;
+  height: 4px;
+  background: #fff;
+  margin-bottom: 40px;
+}
+.anim-wrapper {
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 900;
+  font-size: 8em;
+  font-family: "Source Sans Pro", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 #slide2 {
   background-image: url("~@/assets/images/section2-2.jpeg");
 }
+
 #menu {
   position: fixed;
   top: 20px;
