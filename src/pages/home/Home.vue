@@ -4,7 +4,7 @@
  * @Author: Yimi81
  * @Date: 2020-11-25 17:03:54
  * @LastEditors: Yimi81
- * @LastEditTime: 2021-01-11 15:53:48
+ * @LastEditTime: 2021-01-19 15:28:03
 -->
 <template>
   <div>
@@ -13,9 +13,11 @@
         <a href="#page1">Home</a>
       </li>
       <li data-menuanchor="page2"><a href="#page2">Works</a></li>
-      <li data-menuanchor="page3"><a href="#page3">About</a></li>
+      <li data-menuanchor="page3"><a href="#page3">Evaluate</a></li>
+      <li data-menuanchor="page4"><a href="#page4">About</a></li>
     </ul>
     <full-page ref="fullpage" :options="options" id="fullpage">
+      <!--欢迎页-->
       <div class="section" id="section0">
         <div class="title">
           <transition
@@ -38,15 +40,19 @@
           </transition>
         </div>
       </div>
+      <!--个人作品-->
       <div class="section" id="section1">
         <div class="slide" id="slide1">
           <transition enter-active-class="animate__fadeInLeft">
             <div v-if="flag1" class="work-info animate__animated">
+              <p class="work-item">作品一</p>
               <p class="intro-line"></p>
-              <p>Use the wow factor to impress your visitors!</p>
               <h1 class="anim-wrapper">
-                <span>Wow!</span>
+                <span>毕业设计</span>
               </h1>
+              <p class="work-detail">
+                一款混合开发模式下的校园社交app,旨在聚合校园各公众号，以及加强各学院师生的交流。
+              </p>
             </div>
           </transition>
           <transition enter-active-class="animate__fadeInRight">
@@ -69,15 +75,58 @@
         </div>
 
         <div class="slide" id="slide2">
-
+          <div class="work-info">
+            <p class="work-item">作品二</p>
+            <p class="intro-line"></p>
+            <h1 class="anim-wrapper">
+              <span></span>
+            </h1>
+            <p class="work-detail">
+              一款混合开发模式下的校园社交app,旨在聚合校园各公众号，以及加强各学院师生的交流。
+            </p>
+          </div>
+          <div class="work-imgs">
+            <div class="block">
+              <el-carousel trigger="click">
+                <el-carousel-item v-for="item in frontWork" :key="item.url">
+                  <el-row style="margin-bottom: 10px;width:100%">
+                    <el-col :span="7" style="color: white"
+                      >点击轮播图查看详情
+                    </el-col>
+                    <el-col :span="15" :offset="2">
+                      <a :href="item.url" target="_blank">
+                        官网链接: {{ item.url }}
+                      </a>
+                    </el-col>
+                  </el-row>
+                  <el-image :src="item.img" :fit="item.fit">
+                    <div slot="error" class="image-slot">
+                      <i class="el-icon-picture-outline"></i>
+                    </div>
+                  </el-image>
+                </el-carousel-item>
+              </el-carousel>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!--个人评价-->
       <div class="section" id="section2">
         <div class="container">
           <!--调用组件简化代码-->
           <transition enter-active-class="animate__animated animate__fadeIn">
-            <resume v-if="flag2" :resumeDetail="resumeDeatil"> </resume>
+            <evaluate v-if="flag2"> </evaluate>
+          </transition>
+        </div>
+      </div>
+
+      <!--个人履历-->
+      <div class="section" id="section3">
+        <div class="container">
+          <!--调用组件简化代码-->
+          <transition enter-active-class="animate__animated animate__fadeIn">
+            <resume v-if="flag3" :resumeDetail="resumeDeatil"> </resume>
           </transition>
         </div>
       </div>
@@ -88,6 +137,7 @@
 <script>
 import "fullpage.js/dist/fullpage.css";
 import Resume from "./components/Resume.vue";
+import Evaluate from "./components/Evaluate.vue";
 export default {
   name: "",
   data() {
@@ -95,8 +145,8 @@ export default {
       //fullpage配置
       options: {
         menu: "#menu",
-        anchors: ["page1", "page2", "page3"],
-        sectionsColor: ["#41b883", "#ff5f45", "#0798ec"],
+        anchors: ["page1", "page2", "page3", "page4"],
+        sectionsColor: ["#41b883", "#ff5f45", "#0798ec", "#0798ec"],
         onLeave: this.onLeave,
         afterLoad: this.afterLoad,
         afterRender: this.afterRender,
@@ -105,6 +155,7 @@ export default {
       flag0: false,
       flag1: false,
       flag2: false,
+      flag3: false,
       techUrls: [
         require("../../assets/images/tech-1.png"),
         require("../../assets/images/tech-2.png"),
@@ -115,6 +166,18 @@ export default {
         require("../../assets/images/tech-7.png"),
         require("../../assets/images/tech-8.png"),
         require("../../assets/images/tech-6.png"),
+      ],
+      frontWork: [
+        {
+          img: require("../../assets/images/works/huige.png"),
+          url: "https://huigeoutdoor.com",
+          fit: "cover",
+        },
+        {
+          img: require("../../assets/images/works/cf.png"),
+          url: "http://www.creolefeast.com",
+          fit: "cover",
+        },
       ],
       //个人履历
       resumeDeatil: [
@@ -171,6 +234,7 @@ export default {
   },
   components: {
     resume: Resume,
+    evaluate: Evaluate,
   },
   created() {},
   mounted() {
@@ -241,7 +305,7 @@ export default {
   background-image: url("~@/assets/images/parallax-2.jpg");
 } */
 #section2 {
-  background-image: url("~@/assets/images/2.jpg");
+  background-image: url("~@/assets/images/g8.jpg");
   position: relative;
   z-index: 0;
   padding: 5rem 0;
@@ -303,15 +367,16 @@ export default {
   right: 0;
   z-index: -1;
 }
-#slide1 .work-info {
+.work-info {
   margin: 0 auto;
   display: inline-block;
   width: auto;
   padding: 0 0 0 10%;
   position: absolute;
   top: 32%;
+  width: 30%;
 }
-#slide1 .work-video {
+.work-video {
   position: absolute;
   top: 32%;
   padding-right: 10%;
@@ -320,6 +385,11 @@ export default {
 .video-style {
   width: 300px;
   height: 300px;
+}
+.work-item {
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 10px;
 }
 p {
   padding: 0;
@@ -334,20 +404,56 @@ p.intro-line {
   background: #fff;
   margin-bottom: 40px;
 }
+.work-detail {
+  text-indent: 2em;
+  word-break: break-all;
+}
 .anim-wrapper {
   overflow: hidden;
   position: relative;
   color: #fff;
   font-weight: 900;
-  font-size: 8em;
+  font-size: 3em;
   font-family: "Source Sans Pro", sans-serif;
   margin: 0;
   padding: 0;
 }
 #slide2 {
   background-image: url("~@/assets/images/section2-2.jpeg");
+  position: relative;
+  z-index: 0;
 }
 
+#slide2:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.57);
+  position: absolute;
+  top: 0;
+  min-height: 100%;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+#slide2 .work-imgs {
+  position: absolute;
+  top: 32%;
+  padding-right: 10%;
+  right: 0;
+}
+#slide2 .block {
+  width: 560px;
+  height: 315px;
+}
+#slide2 a {
+  text-decoration: none;
+  color: white;
+  float: right;
+}
+#slide2 a:hover {
+  text-decoration: none;
+  color: #F56C6C;
+  float: right;
+}
 #menu {
   position: fixed;
   top: 20px;
@@ -425,5 +531,26 @@ h5 {
 }
 .animate__animated.animate__fadeIn {
   --animate-duration: 4s;
+}
+
+#section3 {
+  background-image: url("~@/assets/images/2.jpg");
+  position: relative;
+  z-index: 0;
+  padding: 5rem 0;
+}
+#section3:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.57);
+  position: absolute;
+  top: 0;
+  min-height: 100%;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.el-image {
+  cursor: pointer;
 }
 </style>

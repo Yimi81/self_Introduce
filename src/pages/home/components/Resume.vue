@@ -4,7 +4,7 @@
  * @Author: Yimi81
  * @Date: 2021-01-07 15:19:08
  * @LastEditors: Yimi81
- * @LastEditTime: 2021-01-07 16:17:48
+ * @LastEditTime: 2021-01-14 15:11:57
 -->
 <template>
   <div id="resume">
@@ -70,9 +70,7 @@ h5 {
   padding: 0;
   font-family: "Nunito", sans-serif;
 }
-#resume{
-    vertical-align: unset;
-}
+
 #resume h3 {
   font-size: 36px;
   color: #fff;
