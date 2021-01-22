@@ -4,7 +4,7 @@
  * @Author: Yimi81
  * @Date: 2020-11-25 17:03:54
  * @LastEditors: Yimi81
- * @LastEditTime: 2021-01-19 15:28:03
+ * @LastEditTime: 2021-01-21 16:44:44
 -->
 <template>
   <div>
@@ -24,7 +24,7 @@
             enter-active-class="animate__fadeInUp"
             :duration="{ enter: 800 }"
           >
-            <p v-if="flag0" class="animate__animated">Hello,I'm Mark Yi</p>
+            <p v-if="flag0" class="animate__animated" >Hello,I'm Mark Yi</p>
           </transition>
 
           <transition>
@@ -35,7 +35,7 @@
             :duration="{ enter: 800 }"
           >
             <div v-if="flag0" class="animate__animated technologies">
-              <img v-for="url in techUrls" :src="url" :key="url" />
+              <img v-for="url in techUrls" :src="url" :key="url" style="width:30px;height:30px"/>
             </div>
           </transition>
         </div>
@@ -90,16 +90,16 @@
               <el-carousel trigger="click">
                 <el-carousel-item v-for="item in frontWork" :key="item.url">
                   <el-row style="margin-bottom: 10px;width:100%">
-                    <el-col :span="7" style="color: white"
-                      >点击轮播图查看详情
+                    <el-col :span="9" style="color: white"
+                      >点击轮播图查看我负责的详情
                     </el-col>
-                    <el-col :span="15" :offset="2">
+                    <el-col :span="14" :offset="1">
                       <a :href="item.url" target="_blank">
                         官网链接: {{ item.url }}
                       </a>
                     </el-col>
                   </el-row>
-                  <el-image :src="item.img" :fit="item.fit">
+                  <el-image :src="item.img" :fit="item.fit" @click="showDetail">
                     <div slot="error" class="image-slot">
                       <i class="el-icon-picture-outline"></i>
                     </div>
@@ -131,6 +131,54 @@
         </div>
       </div>
     </full-page>
+    <el-dialog
+      title="我的主要贡献"
+      :visible.sync="dialogVisible"
+      width="40%"
+      center
+    >
+    <div class="content">
+        <h3 style="margin-bottom:10px">
+          模块一
+        </h3>
+        <el-row style="padding:0 10px">
+          <el-col :span="19">
+            <ul>
+              <li>1,我完成了什么...，难点在于....</li>
+              <li>2,我完成了什么...，难点在于....</li>
+              <li>3,我完成了什么...，难点在于....</li>
+            </ul>
+          </el-col>
+          <el-col :span="4" :offset="1" class="show-img">
+                <i class="el-icon-right animate__animated animate__heartBeat animate__infinite	infinite" @click="drawer = true"></i>
+          </el-col>
+        </el-row>
+        <el-row style="margin-top:10px">
+          <el-col :span="3" class="little-title">
+             完成评分: 
+          </el-col>
+          <el-col :span="20" :offset="1">
+              <el-rate
+                v-model="value"
+                disabled
+                show-score
+                text-color="#ff9900"
+                score-template="{value}">
+              </el-rate>
+          </el-col>
+
+        </el-row>
+        <el-divider></el-divider>
+    </div>
+
+    </el-dialog>
+    <el-drawer
+      title="我是标题"
+      :visible.sync="drawer"
+      :direction="direction"
+      >
+      <span>我来啦!</span>
+    </el-drawer>
   </div>
 </template>
 
@@ -138,15 +186,16 @@
 import "fullpage.js/dist/fullpage.css";
 import Resume from "./components/Resume.vue";
 import Evaluate from "./components/Evaluate.vue";
+
 export default {
   name: "",
   data() {
     return {
+      value:4.0,
       //fullpage配置
       options: {
         menu: "#menu",
         anchors: ["page1", "page2", "page3", "page4"],
-        sectionsColor: ["#41b883", "#ff5f45", "#0798ec", "#0798ec"],
         onLeave: this.onLeave,
         afterLoad: this.afterLoad,
         afterRender: this.afterRender,
@@ -165,9 +214,16 @@ export default {
         require("../../assets/images/tech-9.png"),
         require("../../assets/images/tech-7.png"),
         require("../../assets/images/tech-8.png"),
+        require("../../assets/images/tech-10.png"),
         require("../../assets/images/tech-6.png"),
+
       ],
       frontWork: [
+        {
+          img: require("../../assets/images/works/rgc.png"),
+          url: "http://royalgourmetcorp.com/",
+          fit: "cover",
+        },
         {
           img: require("../../assets/images/works/huige.png"),
           url: "https://huigeoutdoor.com",
@@ -178,6 +234,7 @@ export default {
           url: "http://www.creolefeast.com",
           fit: "cover",
         },
+
       ],
       //个人履历
       resumeDeatil: [
@@ -227,14 +284,15 @@ export default {
           },
         },
       ],
-      // styleObject:{
-      //    backgroundImage:`url(${require('../../assets/images/parallax-2.jpg')})`,
-      // }
+      dialogVisible:false,
+      direction: 'rtl',
+      drawer:false
     };
   },
   components: {
     resume: Resume,
     evaluate: Evaluate,
+
   },
   created() {},
   mounted() {
@@ -265,6 +323,10 @@ export default {
     // afterLoad() {
     //   this.flag = true;
     // },
+    showDetail()
+    {
+      this.dialogVisible = true
+    }
   },
 };
 </script>
@@ -552,5 +614,13 @@ h5 {
 
 .el-image {
   cursor: pointer;
+}
+.little-title{
+  font-weight: bold;
+}
+.show-img{
+   color:#409EFF;
+   font-size: 40px;
+   cursor: pointer;
 }
 </style>
