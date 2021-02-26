@@ -3,33 +3,36 @@
  * @version: 
  * @Author: Yimi81
  * @Date: 2021-01-07 15:19:08
- * @LastEditors: Yimi81
- * @LastEditTime: 2021-01-14 15:11:57
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-02-25 17:09:57
 -->
 <template>
   <div id="resume">
     <el-row>
       <el-col :span="12">
         <h3 class="mb-2">
-          Experiences
+            工作经历
         </h3>
       </el-col>
       <el-col :span="11" :offset="1">
         <h3 class="mb-2">
-          Education
+            教育经历
         </h3>
       </el-col>
     </el-row>
     <el-row v-for="item in resumeDetail" :key="item.key">
       <el-col :span="12">
-        <div class="experience-top">
+        <div v-if="item.experiences"  class="experience-top">
           <h5>{{ item.experiences.time }}</h5>
           <h4>{{ item.experiences.title }}</h4>
           <p>{{ item.experiences.detail }}</p>
         </div>
+        <div v-else class="zw">
+
+        </div>
       </el-col>
       <el-col :span="11" :offset="1">
-        <div class="experience-top">
+        <div v-if="item.education" class="experience-top">
           <h5>{{ item.education.time }}</h5>
           <h4>{{ item.education.title }}</h4>
           <p>{{ item.education.detail }}</p>
@@ -70,7 +73,9 @@ h5 {
   padding: 0;
   font-family: "Nunito", sans-serif;
 }
-
+#resume {
+  overflow: hidden;
+}
 #resume h3 {
   font-size: 36px;
   color: #fff;
@@ -81,20 +86,21 @@ h5 {
   font-size: 20px;
   color: #fff;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 #resume h5 {
   padding: 6px 10px 5px 10px;
   border: 2px solid #35a22c;
   color: #fff;
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 16px;
   /* line-height: 24px; */
   font-weight: 700;
+
 }
 #resume .mb-2 {
-  margin-bottom: 2rem !important;
+  margin-bottom: 1rem !important;
 }
 .el-col {
   text-align: left;
@@ -105,9 +111,16 @@ h5 {
   padding-bottom: 10px;
   height: 30%;
 }
+.zw {
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  height: 30%;
+}
 .experience-top p {
   line-height: 24px;
   font-size: 16px;
+  height: 48px;
+  
   color: #585858;
   font-weight: normal;
   font-style: normal;
