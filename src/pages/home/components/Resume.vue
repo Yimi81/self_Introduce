@@ -8,37 +8,46 @@
 -->
 <template>
   <div id="resume">
-    <el-row>
-      <el-col :span="12">
-        <h3 class="mb-2">
-            工作经历
-        </h3>
-      </el-col>
-      <el-col :span="11" :offset="1">
-        <h3 class="mb-2">
-            教育经历
-        </h3>
-      </el-col>
-    </el-row>
-    <el-row v-for="item in resumeDetail" :key="item.key">
-      <el-col :span="12">
-        <div v-if="item.experiences"  class="experience-top">
+    <div class="left">
+      <h3 class="mb-2">工作经历</h3>
+      <div v-for="item in resumeDetail" :key="item.key">
+        <div v-if="item.experiences" class="experience-top">
           <h5>{{ item.experiences.time }}</h5>
-          <h4>{{ item.experiences.title }}</h4>
-          <p>{{ item.experiences.detail }}</p>
+          <el-collapse v-model="activeNames2" accordion>
+            <el-collapse-item
+              :title="item.experiences.title"
+              :name="item.experiences.title"
+              class="test"
+            >
+              <p class="textStyle">{{ item.experiences.detail }}</p>
+            </el-collapse-item>
+          </el-collapse>
         </div>
-        <div v-else class="zw">
-
-        </div>
-      </el-col>
-      <el-col :span="11" :offset="1">
+      </div>
+    </div>
+    <div class="right">
+      <h3 class="mb-2">教育经历</h3>
+      <div v-for="item in resumeDetail" :key="item.key">
         <div v-if="item.education" class="experience-top">
           <h5>{{ item.education.time }}</h5>
-          <h4>{{ item.education.title }}</h4>
-          <p>{{ item.education.detail }}</p>
+          <el-collapse v-model="activeNames" accordion>
+            <el-collapse-item
+              :title="item.education.title + '相关情况'"
+              :name="item.education.title"
+              class="test"
+            >
+              <p
+                class="textStyle"
+                v-for="text in item.education.detail"
+                :key="text"
+              >
+                {{ text }}
+              </p>
+            </el-collapse-item>
+          </el-collapse>
         </div>
-      </el-col>
-    </el-row>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -46,7 +55,10 @@
 export default {
   name: "",
   data() {
-    return {};
+    return {
+      activeNames: ["大四"],
+      activeNames2: ["全职前端工程师"],
+    };
   },
   props: {
     resumeDetail: {
@@ -57,8 +69,16 @@ export default {
       require: true,
     },
   },
-  created() {},
-  mounted() {},
+  created() {
+    // this.adaptHeight = document.documentElement.clientHeight - 220;
+  },
+  mounted() {
+    // 监听屏幕大小变化，改变table高度
+    // var _self = this;
+    // window.onresize = function () {
+    //   _self.adaptHeight = document.documentElement.clientHeight - 220;
+    // };
+  },
   methods: {},
 };
 </script>
@@ -72,9 +92,11 @@ h5 {
   margin: 0;
   padding: 0;
   font-family: "Nunito", sans-serif;
+  text-align: left;
 }
 #resume {
   overflow: hidden;
+  height: 100% !important;
 }
 #resume h3 {
   font-size: 36px;
@@ -97,30 +119,21 @@ h5 {
   font-size: 16px;
   /* line-height: 24px; */
   font-weight: 700;
-
 }
 #resume .mb-2 {
   margin-bottom: 1rem !important;
 }
-.el-col {
-  text-align: left;
-}
+
 .experience-top {
   border-bottom: solid 1px rgba(250, 250, 250, 0.32);
   margin-bottom: 30px;
   padding-bottom: 10px;
-  height: 30%;
+  text-align: left;
 }
-.zw {
-  margin-bottom: 30px;
-  padding-bottom: 10px;
-  height: 30%;
-}
+
 .experience-top p {
   line-height: 24px;
   font-size: 16px;
-  height: 48px;
-  
   color: #585858;
   font-weight: normal;
   font-style: normal;
@@ -132,5 +145,35 @@ h5 {
 p {
   margin: 0;
   padding: 0;
+}
+.textStyle {
+  text-align: left;
+  text-indent: 2em;
+  word-break: break-all;
+}
+.left {
+  float: left;
+  width: 45%;
+  margin-right: 10%;
+}
+.right {
+  float: left;
+  width: 45%;
+}
+.el-collapse {
+  border-top: none;
+  border-bottom: none;
+}
+.test >>> .el-collapse-item__header {
+  background-color: transparent;
+  color: white;
+  border-bottom: none;
+  font-weight: bold;
+  font-size: 20px;
+  font-weight: 700;
+}
+.test >>> .el-collapse-item__wrap {
+  background-color: transparent;
+  border-bottom: none;
 }
 </style>
