@@ -3,8 +3,8 @@
  * @version: 
  * @Author: Yimi81
  * @Date: 2021-01-14 15:35:42
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-01 10:08:14
+ * @LastEditors: Yimi81
+ * @LastEditTime: 2021-03-08 22:24:25
 -->
 <template>
   <div>
@@ -41,20 +41,20 @@ export default {
   data() {
     return {
       hobby: [
-        "大二期间接触了Unity3D游戏引擎,游戏引擎所涉及的图形渲染分支引起自己的浓厚兴趣,为此自己认真学习当时学期的C++课程为未来打好基础,学期毕业C++课程取得了95分的良好成绩",
-        "喜欢图形学,图形学的应用领域广泛(Video Games、Movies、Visualization、VR...),跟前端一样可以实时给自己反馈,开发出炫酷、美丽的东西很有成就感.目前自己仅仅了解基础概念,未来非常渴望能深入研究.",
-        "Computer Graphics is Awesome!",
+        "大二期间接触了Unity3D游戏引擎,对游戏引擎所涉及的AI与图形渲染分支产生浓厚兴趣,为此自己认真学习C++课程,学期毕业C++课程取得了94分的良好成绩",
+        "对深度学习与图形学有浓厚兴趣,人工智能是当前主流趋势，而深度学习是其重要一环；图形学的应用领域广泛(Video Games、Movies、Visualization、VR...),实时给自己反馈,开发出炫酷、美丽的东西很有成就感.目前自己仅仅了解基础概念,未来非常渴望能深入研究.",
       ],
       ability: [
-        "语言: html+css+js 、flutter的dart语言 、熟练掌握C++基础知识 ;",
+        "语言: html+css+js 、flutter的dart语言 、熟练掌握C++基础知识，工作接触学习了C#基础;",
         "框架/库: PC端: vue 、 element-ui 、 jquery 、 bootstrap ; 移动端: flutter",
         "开发平台: 了解.Net、Node.js基础",
+        "工具: git&svn版本控制工具、vscode、visual studio",
         "扎实的专业课基础(本科期间专业课成绩在年级前列),良好的数学与英语能力(考研数学一121分、通过了CET6级)"
       ],
       character: [
         "自己是一个比较宅的人,喜欢音乐、动漫和开发游戏.",
-        "自我认为优点是自学能力强、比较专注、好相处,本科期间自学了许多感兴趣的知识、在学习或接触自己感兴趣的事物时非常专注,从小到大在班级自己比较幽默交到了很多朋友.",
-        "缺点是缺乏自信、毛手毛脚,在讲台上会很紧张,小事情喜欢拖着,常常会带来一些问题.",
+        "优点: 能够快速接受新事物、做事专注认真负责、抗压能力强。本科期间自学了许多感兴趣的知识，在学习或接触自己感兴趣的事物时非常专注，喜欢学习感兴趣的新事物.",
+        "缺点：慢热，话少",
       ],
     };
   },
@@ -77,7 +77,7 @@ h3 {
   grid-gap: 20px;
   text-align: center !important;
   padding-top: 1rem !important;
-  margin-top: 4rem !important;
+  margin-top: 2rem !important;
 }
 .three-grids-columns {
   padding: 40px 40px;

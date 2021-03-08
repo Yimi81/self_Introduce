@@ -3,8 +3,8 @@
  * @version: 
  * @Author: Yimi81
  * @Date: 2020-11-25 17:03:54
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-01 10:40:21
+ * @LastEditors: Yimi81
+ * @LastEditTime: 2021-03-08 22:07:22
 -->
 <template>
   <div>
@@ -255,9 +255,14 @@
     </el-drawer>
 
     <!--简历及相关证明-->
+
     <el-tooltip content="简历及相关证明" placement="top" effect="light">
-      <el-image class="resume" :src="resumeUrl" :preview-src-list="srcList">
-      </el-image>
+        <el-image
+          class="animate__animated animate__heartBeat animate__delay-3s animate__repeat-3 resume"
+          :src="resumeUrl"
+          :preview-src-list="srcList"
+        >
+        </el-image>
     </el-tooltip>
   </div>
 </template>
@@ -333,8 +338,10 @@ export default {
           education: {
             time: "2019 - 2020",
             title: "大四",
-            detail: [`准备毕业设计与复试相关内容,毕设在考虑到学校各学院交流少以及公众号信息无法及时获得的情况,选择一个设计一个跨平台的校园社交App为题,
-                    在导师帮助下，自己独立设计样式与完成编码工作，顺利完成毕设。`],
+            detail: [
+              `准备毕业设计与复试相关内容,毕设在考虑到学校各学院交流少以及公众号信息无法及时获得的情况,选择一个设计一个跨平台的校园社交App为题,
+                    在导师帮助下，自己独立设计样式与完成编码工作，顺利完成毕设。`,
+            ],
           },
         },
         {
@@ -342,8 +349,7 @@ export default {
           experiences: {
             time: "2017 - 2018",
             title: "兼职生活",
-            detail:
-              `本科大一及大二的暑假以及国庆，分别兼职工作过盒马生鲜、Hello单车、服务员和衣服厂运货员，赚取了生活费，
+            detail: `本科大一及大二的暑假以及国庆，分别兼职工作过盒马生鲜、Hello单车、服务员和衣服厂运货员，赚取了生活费，
               减轻家庭负担，培养了自己吃苦耐劳品质的同时也深刻认识到知识的重要性，想要获得一份好工作，必须不断学习，提升自己的价值。`,
           },
           education: {
@@ -353,7 +359,7 @@ export default {
               `大三上学期学习网站开发,分别是JSP与.NET,除了老师教的Jquery,自己通过钻研了解当时三大框架已经非常流行了
               ,于是自学了Vue,vue的双向绑定机制、组件化开发、脚手架,npm的包管理,webpack的模块打包、热更新大大提升了开发效率,
               应用到我的课设后,得到了老师的积极评价,分别取得了92与97分的优异成绩.`,
-              `大三下学期投入到研究生考试的复习中,`
+              `大三下学期投入到研究生考试的复习中`,
             ],
           },
         },
@@ -381,8 +387,9 @@ export default {
       padTop: "",
       resumeUrl: require("../../assets/images/resume.png"),
       srcList: [
-        "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg",
-        "https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg",
+        "http://119.23.62.18/Download/ygf_resume.jpg",
+        "http://119.23.62.18/Download/zm_1.jpg",
+        "http://119.23.62.18/Download/zm_2.jpg",
       ],
       workId: 0,
     };

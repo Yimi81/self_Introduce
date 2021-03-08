@@ -3,8 +3,8 @@
  * @version: 
  * @Author: Yimi81
  * @Date: 2021-01-07 15:19:08
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-02-25 17:09:57
+ * @LastEditors: Yimi81
+ * @LastEditTime: 2021-03-08 21:51:23
 -->
 <template>
   <div id="resume">
@@ -56,7 +56,7 @@ export default {
   name: "",
   data() {
     return {
-      activeNames: ["大四"],
+      activeNames: ["大一、大二"],
       activeNames2: ["全职前端工程师"],
     };
   },
